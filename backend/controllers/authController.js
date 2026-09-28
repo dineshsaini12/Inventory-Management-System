@@ -35,8 +35,11 @@ const signup = async (req, res) => {
             username,
             email,
             phone_no,
-            password
+            password,
+            staff_role
         } = req.body;
+
+        const normalizedRole = String(staff_role || "staff").toLowerCase();
 
 
         // --------------------------------------------------------
@@ -65,6 +68,13 @@ const signup = async (req, res) => {
                 message: "Password must be at least 6 characters"
             });
 
+        }
+
+        if (!["staff", "manager"].includes(normalizedRole)) {
+            return res.status(400).json({
+                success: false,
+                message: "Role must be staff or manager"
+            });
         }
 
 
@@ -145,7 +155,7 @@ const signup = async (req, res) => {
                 hashedPassword,
                 phone_no,
                 email,
-                "Staff"
+                normalizedRole
             ]
         );
 
@@ -165,7 +175,7 @@ const signup = async (req, res) => {
                 username: username,
                 email: email,
                 phone_no: phone_no,
-                staff_role: "Staff"
+                staff_role: normalizedRole
             }
 
         });
@@ -263,6 +273,9 @@ const login = async (req, res) => {
 
 
         const user = users[0];
+        user.staff_role = String(user.staff_role || "staff")
+            .trim()
+            .toLowerCase();
 
 
         // --------------------------------------------------------

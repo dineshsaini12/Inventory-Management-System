@@ -21,6 +21,7 @@ const Signup = () => {
         username: "",
         email: "",
         phone_no: "",
+        staff_role: "staff",
         password: "",
         confirmPassword: ""
     });
@@ -100,6 +101,7 @@ const Signup = () => {
                     username: formData.username,
                     email: formData.email,
                     phone_no: formData.phone_no,
+                    staff_role: formData.staff_role,
                     password: formData.password
                 }
 
@@ -117,6 +119,7 @@ const Signup = () => {
                     username: "",
                     email: "",
                     phone_no: "",
+                    staff_role: "staff",
                     password: "",
                     confirmPassword: ""
                 });
@@ -474,6 +477,28 @@ const Signup = () => {
 
                         </div>
 
+                    </div>
+
+
+                    {/* ROLE */}
+
+                    <div>
+                        <label className="mb-1.5 block text-sm font-semibold text-gray-700">
+                            Staff Role
+                        </label>
+                        <select
+                            name="staff_role"
+                            value={formData.staff_role}
+                            onChange={handleChange}
+                            required
+                            className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10"
+                        >
+                            <option value="staff">Staff</option>
+                            <option value="manager">Manager</option>
+                        </select>
+                        <p className="mt-1 text-xs text-gray-500">
+                            Managers can access all inventory sections. Staff have limited access.
+                        </p>
                     </div>
 
 

@@ -19,7 +19,6 @@ const inventoryRoutes = require("./routes/inventoryRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const reportRoutes = require("./routes/reportRoutes");
-
 const authRoutes = require("./routes/authRoutes");
 
 // Middleware
@@ -48,8 +47,8 @@ app.use("/api/customer_orders", customerOrderRoutes);
 app.use("/api/inventory", inventoryRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/reports", reportRoutes);
-
 app.use("/api/auth", authRoutes);
+
 
 // Start server
 const PORT = 5000;

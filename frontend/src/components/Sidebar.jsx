@@ -19,6 +19,13 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
     const navigate = useNavigate();
 
+    const storedUser = localStorage.getItem("user");
+    const user = storedUser ? JSON.parse(storedUser) : null;
+    const userRole = String(user?.staff_role ?? user?.role ?? "")
+        .trim()
+        .toLowerCase();
+    const isManager = userRole === "manager";
+
     const menuItems = [
         {
             name: "Dashboard",
@@ -68,7 +75,9 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
             icon: FileBarChart,
             section: "Records",
         },
-    ];
+    ].filter((item) =>
+        isManager || !["/customers", "/purchases", "/reports"].includes(item.path)
+    );
 
 
     // ============================================================
